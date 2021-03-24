@@ -89,6 +89,9 @@ public class Code06_Dijkstra {
         }
     }
 
+    /**
+     * *************通过堆进行优化***********
+     */
     public static class NodeHeap {
         private Node[] nodes; // 实际的堆结构
         // key 某一个node， value 上面堆中的位置
