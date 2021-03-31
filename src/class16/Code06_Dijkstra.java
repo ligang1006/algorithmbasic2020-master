@@ -94,7 +94,10 @@ public class Code06_Dijkstra {
      */
     public static class NodeHeap {
         private Node[] nodes; // 实际的堆结构
-        // key 某一个node， value 上面堆中的位置
+        /**
+         * key 某一个node， value 上面堆中的位置 Integer就是一个下标
+         * -1说明曾经在堆上，ignore的
+         */
         private HashMap<Node, Integer> heapIndexMap;
         // key 某一个节点， value 从源节点出发到该节点的目前最小距离
         private HashMap<Node, Integer> distanceMap;
@@ -112,7 +115,7 @@ public class Code06_Dijkstra {
         }
 
         // 有一个点叫node，现在发现了一个从源节点出发到达node的距离为distance
-        // 判断要不要更新，如果需要的话，就更新
+        // 判断要不要更新，如果需要的话，就更新，不存在就add 存在是否需要ignore和uodate
         public void addOrUpdateOrIgnore(Node node, int distance) {
             if (inHeap(node)) {
                 distanceMap.put(node, Math.min(distanceMap.get(node), distance));
@@ -160,10 +163,24 @@ public class Code06_Dijkstra {
             }
         }
 
+        /**
+         * 如何判断一个节点之前是否进来过
+         * 某一个node， value 上面堆中的位置 在堆中的位置进来过
+         *
+         * @param node
+         * @return
+         */
         private boolean isEntered(Node node) {
             return heapIndexMap.containsKey(node);
         }
 
+        /**
+         * 是否在堆上
+         * 之前进来过，并且记录不是-1说明在堆上
+         *
+         * @param node
+         * @return
+         */
         private boolean inHeap(Node node) {
             return isEntered(node) && heapIndexMap.get(node) != -1;
         }
@@ -184,10 +201,17 @@ public class Code06_Dijkstra {
         nodeHeap.addOrUpdateOrIgnore(head, 0);
         HashMap<Node, Integer> result = new HashMap<>();
         while (!nodeHeap.isEmpty()) {
+            //从小根堆里弹出一个最小的记录，一定不是之前已经弄过的记录
+            //以recode做桥连点，更新to的记录
             NodeRecord record = nodeHeap.pop();
             Node cur = record.node;
             int distance = record.distance;
             for (Edge edge : cur.edges) {
+                /**edge.to
+                 * 如果的记录没有--》add
+                 * 如果有--》并且更短满足更新  update
+                 * 如果之前已经处理过 弹出的记录--》ignore
+                 * */
                 nodeHeap.addOrUpdateOrIgnore(edge.to, edge.weight + distance);
             }
             result.put(cur, distance);
