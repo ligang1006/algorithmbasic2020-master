@@ -117,8 +117,11 @@ public class Code06_Dijkstra {
         // 有一个点叫node，现在发现了一个从源节点出发到达node的距离为distance
         // 判断要不要更新，如果需要的话，就更新，不存在就add 存在是否需要ignore和uodate
         public void addOrUpdateOrIgnore(Node node, int distance) {
+            //在堆上
             if (inHeap(node)) {
+                //老记录和新记录笔记进行更新操作
                 distanceMap.put(node, Math.min(distanceMap.get(node), distance));
+
                 insertHeapify(node, heapIndexMap.get(node));
             }
             if (!isEntered(node)) {
