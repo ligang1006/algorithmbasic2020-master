@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Map.Entry;
 
 /**
+ * 视频，动态规划，堆排序c z
+ * <p>
  * 迪克斯特拉 有权图最短路径问题
  * <p>
  * 迪杰斯特拉算法(Dijkstra)是由荷兰计算机科学家狄克斯特拉于1959 年提出的因此又叫狄克斯特拉算法。
@@ -121,17 +123,23 @@ public class Code06_Dijkstra {
             if (inHeap(node)) {
                 //老记录和新记录笔记进行更新操作
                 distanceMap.put(node, Math.min(distanceMap.get(node), distance));
-
+                //往堆上，尝试进行上移动操作
                 insertHeapify(node, heapIndexMap.get(node));
             }
+            //添加
             if (!isEntered(node)) {
+                //在最后的位置挂上
                 nodes[size] = node;
                 heapIndexMap.put(node, size);
                 distanceMap.put(node, distance);
                 insertHeapify(node, size++);
             }
+            //ignore操作
         }
 
+        /**
+         * @return
+         */
         public NodeRecord pop() {
             NodeRecord nodeRecord = new NodeRecord(nodes[0], distanceMap.get(nodes[0]));
             swap(0, size - 1);
@@ -144,7 +152,9 @@ public class Code06_Dijkstra {
         }
 
         private void insertHeapify(Node node, int index) {
-            while (distanceMap.get(nodes[index]) < distanceMap.get(nodes[(index - 1) / 2])) {
+            //这个点点距离比父节点点距离小就移动
+            while (distanceMap.get(nodes[index])
+                    < distanceMap.get(nodes[(index - 1) / 2])) {
                 swap(index, (index - 1) / 2);
                 index = (index - 1) / 2;
             }
