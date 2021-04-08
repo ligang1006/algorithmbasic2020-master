@@ -152,7 +152,7 @@ public class Code06_Dijkstra {
         }
 
         private void insertHeapify(Node node, int index) {
-            //这个点点距离比父节点点距离小就移动
+            //这个点点距离比父节点点距离小就移动，堆的insert调整
             while (distanceMap.get(nodes[index])
                     < distanceMap.get(nodes[(index - 1) / 2])) {
                 swap(index, (index - 1) / 2);
@@ -160,13 +160,16 @@ public class Code06_Dijkstra {
             }
         }
 
+        //堆排序
         private void heapify(int index, int size) {
             int left = index * 2 + 1;
             while (left < size) {
-                int smallest = left + 1 < size && distanceMap.get(nodes[left + 1]) < distanceMap.get(nodes[left])
+                int smallest = left + 1 < size && distanceMap.get(nodes[left + 1])
+                        < distanceMap.get(nodes[left])
                         ? left + 1
                         : left;
-                smallest = distanceMap.get(nodes[smallest]) < distanceMap.get(nodes[index]) ? smallest : index;
+                smallest = distanceMap.get(nodes[smallest])
+                        < distanceMap.get(nodes[index]) ? smallest : index;
                 if (smallest == index) {
                     break;
                 }
@@ -198,6 +201,13 @@ public class Code06_Dijkstra {
             return isEntered(node) && heapIndexMap.get(node) != -1;
         }
 
+        /**
+         * 交换的时候，既要在堆上交换也要在位置表交换，
+         * 同步调整
+         *
+         * @param index1
+         * @param index2
+         */
         private void swap(int index1, int index2) {
             heapIndexMap.put(nodes[index1], index2);
             heapIndexMap.put(nodes[index2], index1);
