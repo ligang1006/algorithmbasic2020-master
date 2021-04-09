@@ -5,6 +5,9 @@ import java.util.Stack;
 /**
  * 视频动态规划 1：22：02
  * 汉诺塔问题
+ * N层  2^N-1
+ *
+ * T(N) =T(N-1)（挪到中间）+1+T(N-1)  (挪回来 最右边)
  * <p>
  * 暴力递归
  * <p>
@@ -139,6 +142,15 @@ public class Code02_Hanoi {
         }
     }
 
+    /**
+     * 非递归
+     *
+     * 系统压站  不让他压站
+     * 自己进行压栈，模拟递归栈怎么去做，，
+     *
+     *
+     */
+
     public static class Record {
         public boolean finish1;
         public int base;
@@ -161,12 +173,15 @@ public class Code02_Hanoi {
             return;
         }
         Stack<Record> stack = new Stack<>();
+        //自己进行压栈 Record(false, N, "left", "right", "mid") false标示步骤还未完成
+
         stack.add(new Record(false, N, "left", "right", "mid"));
         while (!stack.isEmpty()) {
             Record cur = stack.pop();
             if (cur.base == 1) {
                 System.out.println("Move 1 from " + cur.from + " to " + cur.to);
                 if (!stack.isEmpty()) {
+
                     stack.peek().finish1 = true;
                 }
             } else {
