@@ -18,6 +18,10 @@ import java.util.PriorityQueue;
  *
  *
  *
+ * N节点  每次新增节点的时候，，添加进来调整成大根堆操作复杂度---->logN
+ *
+ *
+ *
  * 小根堆
  *
  *               0
@@ -95,13 +99,32 @@ public class Code02_Heap {
             }
         }
 
+        /**
+         *  *                  6
+         *  *  *              / \
+         *  *  *             5   4
+         *  *  *            / \ / \
+         *  *  *           3  4 1  2
+         *
+         *  此时用户需要返回最大值
+         *  并将最大值删掉，剩下的数，依然保持大根堆的结构
+         * @param arr
+         * @param index    下标
+         * @param heapSize 堆大小
+         */
         // 从index位置，往下看，不断的下沉
         // 停：较大的孩子都不再比index位置的数大；已经没孩子了
         private void heapify(int[] arr, int index, int heapSize) {
             int left = index * 2 + 1;
+            //左孩子没越界
             while (left < heapSize) { // 如果有左孩子，有没有右孩子，可能有可能没有！
-                // 把较大孩子的下标，给largest
-                int largest = left + 1 < heapSize && arr[left + 1] > arr[left] ? left + 1 : left;
+                // 把较大孩子的下标，给largest  left + 1 < heapSize 右不越界
+//                1)有右孩子
+//                2）右孩子》左孩子的值
+                //最大值给 largest
+                int largest = left + 1 < heapSize
+                        && arr[left + 1] > arr[left] ? left + 1 : left;
+
                 largest = arr[largest] > arr[index] ? largest : index;
                 if (largest == index) {
                     break;
