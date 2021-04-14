@@ -126,6 +126,7 @@ public class Code02_Heap {
                         && arr[left + 1] > arr[left] ? left + 1 : left;
 
                 largest = arr[largest] > arr[index] ? largest : index;
+                //不需要下沉
                 if (largest == index) {
                     break;
                 }
