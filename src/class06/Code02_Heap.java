@@ -112,8 +112,8 @@ public class Code02_Heap {
          * @param index    下标
          * @param heapSize 堆大小
          */
-        // 从index位置，往下看，不断的下沉
-        // 停：较大的孩子都不再比index位置的数大；已经没孩子了
+        // 从index位置，往下看，不断的下沉 logN
+        // 停：case1、较大的孩子都不再比index位置的数大；case2 已经没孩子了
         private void heapify(int[] arr, int index, int heapSize) {
             int left = index * 2 + 1;
             //左孩子没越界

@@ -10,11 +10,11 @@ public class Code03_HeapSort {
 		if (arr == null || arr.length < 2) {
 			return;
 		}
-		// O(N*logN)
+		// O(N*logN)  经典
 //		for (int i = 0; i < arr.length; i++) { // O(N)
 //			heapInsert(arr, i); // O(logN)
 //		}
-		// O(N)
+		// O(N)  优化
 		for (int i = arr.length - 1; i >= 0; i--) {
 			heapify(arr, i, arr.length);
 		}
