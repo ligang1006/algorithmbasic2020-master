@@ -4,6 +4,25 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Stack;
 
+/**
+ * 并查集
+ * 1）有若干个样本 a b c d...类型假设是V
+ * 2）在并查集中一开始认为每个样本都在单独的集合中（小的集合当中）
+ * 3）用户可以任何时候，调用以下两个方法
+ * boolean isSameSet（V x，V y）：查询样本x和样本y是否是属于一个集合
+ * void union（V x，V y）：把x和y各自所在的集合所有样本进行合并，合并成一个集合
+ * <p>
+ * 4)isSameSet和union方法的代价越低越好
+ * <p>
+ * 一群样本 x x x xx  xxx x xxx
+ * 把样本分成 多个小的集合
+ * 每次调用 3）中的方法之后合并
+ * <p>
+ * 高效实现就是并查集实现 O（1）的复杂度  hash表的并查集
+ *
+ * @author: lee
+ * @create: 2021/4/26 9:38 上午
+ **/
 public class Code05_UnionFind {
 
 	public static class Node<V> {
@@ -45,6 +64,7 @@ public class Code05_UnionFind {
 		}
 
 		public boolean isSameSet(V a, V b) {
+
 			return findFather(nodes.get(a)) == findFather(nodes.get(b));
 		}
 
