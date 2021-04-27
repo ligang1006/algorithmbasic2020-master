@@ -49,6 +49,10 @@ public class MergeUsers {
      * （400，500，37）用户c
      * <p>
      * a b c其实是一个用户
+     * <p>
+     * mapA （1，1，400）
+     * mapB（10，20，500）
+     * mapC（13，37，37）
      *
      * @param users
      * @return

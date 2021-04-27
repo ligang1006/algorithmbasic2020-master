@@ -1,5 +1,10 @@
 package class16;
 
+/**
+ * 图
+ * 数据结构
+ * 图比较复杂，
+ */
 public class GraphGenerator {
 
 	// matrix 所有的边
