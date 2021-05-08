@@ -6,6 +6,8 @@ import java.util.PriorityQueue;
 import java.util.Set;
 
 /**
+ * 暴力递归
+ *
  * 最小生成树的P算法
  * <p>
  * 点--》边--》点--》边。。。。。

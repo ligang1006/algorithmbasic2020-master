@@ -9,8 +9,10 @@ import java.util.Set;
 import java.util.Stack;
 
 /**
+ * 暴力递归
+ * <p>
  * 这里是无向图
- *
+ * <p>
  * 最小生成树 的算法很多 常用K算法和P算法
  * <p>
  * 并查集，实现两大集合连在一起的连通性的问题
